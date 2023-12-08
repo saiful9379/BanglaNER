@@ -68,7 +68,7 @@ __SemiEval : ```JSON``` file of ```Rifat1493_NER``` data example:__
 Sentence like ```একই অভিযোগ করেন মো. বাদল হোসেন নামের আরেক পরীক্ষার্থী।```, then the corresponding tags would be ```["O", "O", "O", "B-PERSON", "I-PERSON", "L-PERSON", "O", "O", "O", "O"]```.
 
 
-```B-PERSON``` means that the word ```"মো.``` is the beginning of a person, ```L-PERSON``` means that the word ```"বাদল"``` is inside a person and ```হোসেন``` is last name a person, ```O``` means that the word ```নামের``` is outside a named entity. U-PERSON mean that "U-" often denotes a unit or unique instance of an entity.
+```B-PERSON``` means that the word ```"মো.``` is the beginning of a person, ```L-PERSON``` means that the word ```"বাদল"``` is inside a person and ```হোসেন``` is last name a person, ```O``` means that the word ```নামের``` is outside a named entity. U-PERSON means that "U-" often denotes a unit or unique instance of an entity.
 
 # Exploratory data analysis(EDA) NER DATA
 
