@@ -1,8 +1,8 @@
 # Bangla_NER
 
-Bangla Name Entity Recognition (NER) is extract human name from input bangla string or text. For solve this problem here try 2 pipeline such as [Spacy](https://spacy.io/) pipeline as well as [BERT](https://en.wikipedia.org/wiki/BERT_(language_model)) model and try 5 experimental approch. 
+Bangla Name Entity Recognition (NER) is extracting human names from input Bangla string or text. To solve this problem here try 2 pipelines such as [Spacy](https://spacy.io/) pipeline as well as [BERT](https://en.wikipedia.org/wiki/BERT_(language_model)) model and try 5 experimental approaches. 
 
-Experiment is done only using one entity name (person) label as PER. After completed the experiement we have got the best performance from spacy transformer based model.
+The experiment is done only using one entity name (person) labeled as PER. After completing the experiment we got the best performance from the spacy transformer-based model.
 
 For more detail please check the experimental detail and F1 score in experimental history. Where best F1-score is ~.81.05 [check](docs/experiemts.md). 
 
@@ -14,7 +14,7 @@ conda create -n bn_ner python=3.8
 pip install -r requirements.txt
 ```
 
-N.B :  if raise  ```CuPy``` error, install ```pip install CuPy==12.3.0``` version for GPU acceleration.
+N.B:  if raise  ```CuPy``` error, install ```pip install CuPy==12.3.0``` version for GPU acceleration.
 
 # Dataset
 
@@ -48,7 +48,7 @@ raw_data
 
 ## Dataset Annotation Information
 
-For getting more information about Bangla NER data please check [check](docs/data_info.md)
+For more information about Bangla NER data please check [check](docs/data_info.md)
 
 ## Data Processing
 
@@ -87,7 +87,7 @@ large  | Default(CPU)  |Docanno  | Training : | 99.01%| 77.39%| 86.88%
 
 For the inference, run ```inference.py``` script the model will download automatically from huggingface and be stored in the "models" folder. After download, it will unzip also.
 
-if have any issue for the model downloading, please download manually from [here](https://huggingface.co/saiful9379/BanglaNER/tree/main)
+if have any issues with the model downloading, please download manually from [here](https://huggingface.co/saiful9379/BanglaNER/tree/main)
 
 run,
 
@@ -96,7 +96,7 @@ pyhton inference.py
 ```
 
 
-Code Exmaple,
+Code Example,
 ```py
 import spacy
 
@@ -151,7 +151,7 @@ For docker install please [check](https://www.digitalocean.com/community/tutoria
 ```
 sudo docker build -t bangla_ner .
 ```
-Check Docker image and image ID,
+Check the Docker image and image ID,
 
 ```
 sudo docker images
@@ -173,22 +173,22 @@ cd inference/
 # run 
 python3 app.py
 ```
-After running app file output show ip address looks like,
+After running app file output show ip-address looks like this,
 
 ```sh
  * Running on all addresses (0.0.0.0)
  * Running on http://127.0.0.1:8008
  * Running on http://172.17.0.2:8008
 ```
-__N.B : For inside the docker inference, Take the last ip and chage the ```End Point API``` request url ```http://localhost:8008/ner"``` using this ```http://172.17.0.2:8008```. this are only when the application run inside docker. otherwise no need to change ```End Point API```__ 
+__N.B: For inside the docker inference, Take the last ip and change the ```End Point API``` request url ```http://localhost:8008/ner"``` using this ```http://172.17.0.2:8008```. this are only when the application run inside docker. otherwise no need to change ```End Point API```__ 
 
 
 
 # End Point API
 
-Some instruction as inferecne section. run ```app.py``` model will download and server will run also.
+Some instruction as inference section. run ```app.py``` model will download and the server will run also.
 
-For more details about API request, please [check](docs/end_point.md)
+For more details about API requests, please [check](docs/end_point.md)
 
 # Reference
 
