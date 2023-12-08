@@ -52,7 +52,7 @@ For more information about Bangla NER data please check [check](docs/data_info.m
 
 ## Data Processing
 
-Please check the data processing approach [check](docs/data_processing)
+Please check the data processing approach [check](docs/training/data_processing)
 
 
 
