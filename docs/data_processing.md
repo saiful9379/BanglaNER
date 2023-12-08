@@ -4,10 +4,10 @@ Data processing approach,
 
 
 1. Raw Data Processing
-2. Span Based Data Procssing(Doccano NER format)
+2. Span Based Data Processing(Doccano NER format)
 3. Preparing Training Spacy Format
 
-<!-- This [IOB-tagging](https://en.wikipedia.org/wiki/Inside%E2%80%93outside%E2%80%93beginning_(tagging)) dataset need to filter bacause some line match with it's label and some are not match. -->
+<!-- This [IOB-tagging](https://en.wikipedia.org/wiki/Inside%E2%80%93outside%E2%80%93beginning_(tagging)) dataset needs to filter because some lines match with its label and some do not match. -->
 ## 1. Raw Data Processing
 Raw data processing steps:
 
@@ -15,13 +15,13 @@ Raw data processing steps:
 
     2. Discard the dataset not matching with label
 
-    3. Clean IOB and remove data which is in wrong IOB format
+    3. Clean IOB and remove data that is in the wrong IOB format
 
     4. BLIOU Annotation checking and correction
 
-    5. Data Distritribution training (80%) and validation (20%)
+    5. Data Distribution training (80%) and validation (20%)
 
-    6. Randomly data suffle - 4 times
+    6. Randomly data shuffle - 4 times
 
 Get for information about ```BLIOU``` format please check [Example](https://github.com/explosion/spaCy/blob/v2.3.5/examples/training/ner_example_data/ner-token-per-line.json)
 
@@ -47,7 +47,7 @@ register_dataset = {
 }
 ```
 
-__N.B: if any dataset not possible collect avoid the data into register field. data will process which have registered.__
+__N.B: if any dataset is not possible to collect avoid the data into the register field. data will be processed which have registered.__
 
 
 Run
@@ -70,9 +70,9 @@ data
     └── val.json
 ```
 
-## 2. Span Based Data Procssing(Doccano NER format)
+## 2. Span-Based Data Processing(Doccano NER format)
 
-For Daccano annotation format please check [link](https://doccano.github.io/doccano/tutorial/)
+For the Doccano annotation format please check [link](https://doccano.github.io/doccano/tutorial/)
 
 Make sure input and output path directory into script ```python utils/conversion_bliou_to_span_format.py```line number ```201```,
 
@@ -85,10 +85,10 @@ output_dir = "./data/ner_spanbased_process_data"
 
 output : 
 ``` sh
-procesed file : ./data/ner_spanbased_process_data/val.jsonl
+processed file : ./data/ner_spanbased_process_data/val.jsonl
 Total number of line : 5208
 Person Entity Found  : 1161
-procesed file : ./data/ner_spanbased_process_data/train.jsonl
+processed file : ./data/ner_spanbased_process_data/train.jsonl
 Total number of line : 20831
 Person Entity Found  : 4483
 ```
