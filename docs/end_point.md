@@ -1,5 +1,5 @@
 # API Request
-For API based testing run ```app.py``` script and open postman, send post request using below request body.
+For API-based testing run ```app.py``` script and open Postman, and send the post request using the below request body.
 
 
 # Python payload,
@@ -24,7 +24,7 @@ return response
 
 # CURL Request,
 
-Install curl for api request,
+Install curl for API requests,
 
 ```
 sudo apt  install curl
@@ -35,9 +35,9 @@ curl localhost:8008/ner -d '{"text" : "তিনি মোহাম্মদ ব
 ```
 
 
-# Postman request url,
+# Postman request URL,
 ```py
-# set post request and give this url
+# set post request and give this URL
 http://localhost:8008/ner
 
 {"text" : "তিনি মোহাম্মদ বাকির আল-সদর এর ছাত্র ছিলেন।", "sender_id" : "saiful"}
