@@ -3,13 +3,13 @@
 - Pipeline configuration
 - Data processing
 - Model Training
-- Evalution
+- Evaluation
 - Inference
 
 ## Pipeline configuration
 
-Training the spacy pipeline need to config from the spacy [link](https://spacy.io/usage/training). Blew the configuration screenshot show the different compenent as well as Hardware compatibility.
-we have choose both CPU and GPU and save it ```config``` folder. 
+Training the spacy pipeline needs to config from the spacy [link](https://spacy.io/usage/training). The configuration screenshot shows the different components as well as Hardware compatibility.
+we have chosen both CPU and GPU and saved it ```config``` folder. 
 
 ![](../image/cpu_config.png)
 
@@ -19,15 +19,15 @@ __Config folder structure__
 
 ```sh
 configs/
-├── base_config_cpu.cfg # base CPU pipeline ner file configuration download from spacy website
-├── base_config_gpu.cfg # base GPU pipeline ner file configuration download from spacy website
+├── base_config_cpu.cfg # base CPU pipeline ner file configuration download from the spacy website
+├── base_config_gpu.cfg # base GPU pipeline ner file configuration download from the spacy website
 └── config.cfg          # use to train configuration
 ```
 
 
 ## Prepare configuration files
 
-Run the command for base_config file to training able config file,
+Run the command for base_config file to train able config file,
 
 CPU, 
 ```
@@ -44,7 +44,7 @@ Data processing already discuss into ```Dataset``` section, if you need more ple
 
 ## Model Training
 
-Make sure configuraiton file ```configs/config_cpu.cfg``` as well as dataset path processed ```.spacy``` format.
+Make sure the configuration file ```configs/config_cpu.cfg``` as well as dataset path processed ```.spacy``` format.
 
 
 
@@ -70,7 +70,7 @@ if want to review training logs please [check](spacy_cpu_train_log.md)
 
 ### __Spacy transformer Based Pipeline(GPU)__
 
-Directly go to spacy transformer based GPU training notebook  : [check](../training/example/BanglaNER_Spacy(transformer).ipynb)
+Directly go to spacy transformer-based GPU training notebook  : [check](../training/example/BanglaNER_Spacy(transformer).ipynb)
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1YU7WXkpdwwmFSwPtZGuzlKgntqmZlALF?usp=sharing)
 
@@ -90,9 +90,9 @@ if want to review training logs please [check](spacy_gpu_training_logs.md)
 
 ## Evalution
 
-The Spacy Based Pipeline evaluate model using ```[stating, ending]``` as well as predicted class.
+The Spacy-Based Pipeline evaluates the model using ```[stating, ending]``` as well as the predicted class.
 
-More sure model path and input data with spanbased annotation,
+More sure model path and input data with span based annotation,
 
 
 Example:
