@@ -1,4 +1,5 @@
 # Bangla_NER
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1uN1WP7MjaBYXKABfhkHGn7EBWm9kd9k9?usp=sharing)
 
 Bangla Name Entity Recognition (NER) is extracting human names from input Bangla string or text. To solve this problem select [Spacy](https://spacy.io/) pipeline and try 5 experimental approaches. 
 
