@@ -50,7 +50,7 @@ raw_data
 
 ## Dataset Annotation Information
 
-Please eheck annotation structure, information about Bangla NER dataset [check](docs/data_info.md)
+Please Check annotation structure, information about Bangla NER dataset [check](docs/data_info.md)
 
 ## Data Processing
 
