@@ -228,6 +228,13 @@ or colab know about into colab check,
 
 # Evaluation
 
+Make sure data annotation path and run,
+
+```
+python eval.py
+
+```
+
 __Model Performance Summary__
 
 ![](./image/model_summary.png)
