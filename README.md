@@ -48,6 +48,12 @@ raw_data
     └── statistics.md
 ```
 
+## Augment Data generation
+
+- Scraping human name data from several website
+- Replace the name into text using span position and update the IOU span of the text.
+
+
 ## Dataset Annotation Information
 
 Please Check annotation structure, information about Bangla NER dataset [check](docs/data_info.md)
@@ -86,7 +92,7 @@ Raw data processing steps:
 Get for information about ```BLIOU``` format please check [Example](https://github.com/explosion/spaCy/blob/v2.3.5/examples/training/ner_example_data/ner-token-per-line.json)
 
 
-For those processing please check the script ```utils/data_processing.py``` line number ```443``` to ```445``` dataset path directory, 
+For processing steps please check the script ```utils/data_processing.py``` line number ```443``` to ```445``` dataset path directory, 
 
 __input__:
 ```sh
@@ -107,7 +113,7 @@ register_dataset = {
 }
 ```
 
-__N.B: if any dataset is not possible to collect avoid the data into the register field. data will be processed which have registered.__
+__N.B: if any dataset is not possible to collect, avoid the data assing into the register field. data will be processed which have registered.__
 
 
 Run
@@ -136,8 +142,6 @@ __1. EDA Report__
 
 ## 2. Span-Based Data Processing(Doccano NER format)
 
-For the Doccano annotation format please check [link](https://doccano.github.io/doccano/tutorial/)
-
 Make sure input and output path directory into script ```python utils/conversion_bliou_to_span_format.py```line number ```201```,
 
 ```sh
@@ -157,12 +161,12 @@ processed file : ./data/ner_spanbased_process_data/val.jsonl
 Total number of line : 5208
 Person Tag Found  : 1161
 ```
-
+For more details about the Doccano annotation format please check [link](https://doccano.github.io/doccano/tutorial/)
 
 
 ## 3. Preparing Training Spacy Format
 
-For convet data to spacy format make sure data path into script ```utils/conversion_spacy_format.py```,
+Convet process data to spacy format make sure data path into script ```utils/conversion_spacy_format.py```,
 
 ``` sh
 # input path dir
@@ -170,7 +174,6 @@ input_dir = "./data/ner_spanbased_process_data"
 # output path dir
 output_dir = "./data/ner_spanbased_process_data"
 ```
-
 
 Output:
 ``` sh
@@ -190,12 +193,10 @@ No. of Skip Entity  : 3
 
 check the annotation visualization [notebook](../training/example/data_annotation_visulization.ipynb)
 
-Now the .spacy file processing process is complete, we can train spacy ner pipeline using .spacy file
+All the processing is complete, let's accerate the model training.
 
 
-
-
-N.B : if you want to train the spacy ner pipeline model using BLIOU format data run below the command,
+N.B : if you want to train the spacy ner pipeline using BLIOU format, run below the command,
 
 ```sh
 Data conversion command for BLIOU, Convert `BLIOU` json format to `.spacy` data format
@@ -205,17 +206,9 @@ python -m spacy convert data/bangla_ner_data/val.json ./data
 
 ```
 
-## 4. Augment Data generation
-
-- Scraping human name data from several website
-- Replace the name into text using span position and update the IOU span of the text.
-
-
 ## 5. Data Processing Summary
 
-Here the report present dataset information, it processing data and exclude data which are not resolve using valid logic. 
-
-
+Here the report presents processed dataset information. During the processing time exclude some data which are not resolvable using valid logic. 
 
 __1. Data Summary__
 ![](image/data_summary.png)
@@ -226,8 +219,9 @@ __1. Data Summary__
 
 ## Training Spacy Pipeline
 
-Please check more details training strategy and spacy model training procedure please [check](docs/spacy.md) or colab training
-click the colab icon.
+Please check the training strategy and procedure [here](docs/spacy.md)
+
+or colab know about into colab check,
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1YU7WXkpdwwmFSwPtZGuzlKgntqmZlALF)
 
@@ -238,15 +232,15 @@ __Model Performance Summary__
 
 ![](./image/model_summary.png)
 
-For more detaild check [report](./report/Bangla_NER_report_20231209.xlsx)
+For more details check [report](./report/Bangla_NER_report_20231209.xlsx)
 
 
 
 # Inference
 
-For the inference, run ```inference.py``` script the model will download automatically from huggingface and be stored in the "models" folder. After download, it will unzip also.
+For the inference, run ```inference.py``` script the model will download from huggingface and save in the "models" folder.
 
-if have any issues with the model downloading, please download manually from [here](https://huggingface.co/saiful9379/BanglaNER/tree/main)
+if have any issues raise model downloading, please download manually from [here](https://huggingface.co/saiful9379/BanglaNER/tree/main)
 
 run,
 
@@ -254,7 +248,6 @@ run,
 pyhton inference.py
 ```
 Or Check the colab for instance inference,
-
 
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1uN1WP7MjaBYXKABfhkHGn7EBWm9kd9k9?usp=sharing)
@@ -347,13 +340,13 @@ After running app file output show ip-address looks like this,
  * Running on http://127.0.0.1:8008
  * Running on http://172.17.0.2:8008
 ```
-__N.B: For inside the docker inference, Take the last ip and change the ```End Point API``` request url ```http://localhost:8008/ner"``` using this ```http://172.17.0.2:8008```. this are only when the application run inside docker. otherwise no need to change ```End Point API```__ 
+__N.B: For API request and docker inference, Take the last ip and change the ```End Point API``` request url ```http://localhost:8008/ner"``` using this ```http://172.17.0.2:8008```. this approch only for inside docker API request purposes. otherwise no need to change ```End Point API```__ 
 
 
 
 # End Point API
 
-Some instruction as inference section. run ```app.py``` model will download and the server will run also.
+Some instruction as inference section. run ```app.py``` model will download and the server will run.
 
 For more details about API requests, please [check](docs/end_point.md)
 
