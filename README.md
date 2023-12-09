@@ -1,10 +1,10 @@
 # Bangla_NER
 
-Bangla Name Entity Recognition (NER) is extracting human names from input Bangla string or text. To solve this problem here try 2 pipelines such as [Spacy](https://spacy.io/) pipeline as well as [BERT](https://en.wikipedia.org/wiki/BERT_(language_model)) model and try 5 experimental approaches. 
+Bangla Name Entity Recognition (NER) is extracting human names from input Bangla string or text. To solve this problem here select [Spacy](https://spacy.io/) pipeline and try 5 experimental approaches. 
 
 The experiment is done only using one entity name (person) labeled as PER. After completing the experiment we got the best performance from the spacy transformer-based model.
 
-For more detail please check the experimental detail and F1 score in experimental history. Where best F1-score is ~.81.05 [check](docs/experiemts.md). 
+For more detail please check the [experimental details](docs/experiemts.md) and Best model F1 score is ~.81.05. 
 
 
 # Installation
@@ -17,6 +17,8 @@ pip install -r requirements.txt
 N.B:  if raise  ```CuPy``` error, install ```pip install CuPy==12.3.0``` version for GPU acceleration.
 
 # Dataset
+
+Check the ```training/utils``` folder for Data processing script. 
 
 ## Data Collection Information
 
@@ -52,8 +54,171 @@ For more information about Bangla NER data please check [check](docs/data_info.m
 
 ## Data Processing
 
-Please check the data processing approach [check](docs/data_processing.md)
 
+Data processing approach,
+
+
+1. Raw Data Processing
+2. Span Based Data Processing(Doccano NER format)
+3. Preparing Training Spacy Format
+4. Augment Data generation
+5. Summary Report
+
+
+<!-- This [IOB-tagging](https://en.wikipedia.org/wiki/Inside%E2%80%93outside%E2%80%93beginning_(tagging)) dataset needs to filter because some lines match with its label and some do not match. -->
+## 1. Raw Data Processing
+Raw data processing steps:
+
+    1. Exclude other classes without PERSON Class(PER)
+
+    2. Discard the dataset not matching with label
+
+    3. Clean IOB and remove data that is in the wrong IOB format
+
+    5. Minimal data remove which is logically valid and matching token.  
+
+    6. BLIOU Annotation checking and correction
+
+    7. Data Distribution training (80%) and validation (20%)
+
+    8. Randomly data shuffle - 4 times
+
+Get for information about ```BLIOU``` format please check [Example](https://github.com/explosion/spaCy/blob/v2.3.5/examples/training/ner_example_data/ner-token-per-line.json)
+
+
+For those processing please check the script ```utils/data_processing.py``` line number ```443``` to ```445``` dataset path directory, 
+
+__input__:
+```sh
+# make sure the input dataset path
+banglakit= "./data/raw_data/banglakit/main.jsonl"
+rifat1493 = "./data/raw_data/Rifat1493_NER_txt/all_data.txt"
+semieval = "./data/raw_data/SemiEval"
+
+```
+
+Register the data line number ```453```,
+
+``` sh
+register_dataset = {
+    "BanglakitNER"   : banglakit,
+    "Rifat1493BnNER" : rifat1493,
+    "SemiEvalBnNER"  : semieval_files
+}
+```
+
+__N.B: if any dataset is not possible to collect avoid the data into the register field. data will be processed which have registered.__
+
+
+Run
+```
+python utils/data_processing.py
+
+```
+Output,
+```sh
+No. of Training data : 20831
+No. of Validation data : 5208
+
+```
+__Data Save directory__,
+
+```sh
+data
+└── ner_bliou_processed_data
+    ├── train.json
+    └── val.json
+```
+
+__1. EDA Report__
+
+![](image/eda.png)
+
+## 2. Span-Based Data Processing(Doccano NER format)
+
+For the Doccano annotation format please check [link](https://doccano.github.io/doccano/tutorial/)
+
+Make sure input and output path directory into script ```python utils/conversion_bliou_to_span_format.py```line number ```201```,
+
+```sh
+#make sure input path directory
+data_path = "./data/ner_bliou_processed_data"
+#make sure output path directory  
+output_dir = "./data/ner_spanbased_process_data"
+```
+
+output : 
+``` sh
+processed file : ./data/ner_spanbased_process_data/train.jsonl
+Total number of line : 20831
+Person Tag Found  : 4483
+
+processed file : ./data/ner_spanbased_process_data/val.jsonl
+Total number of line : 5208
+Person Tag Found  : 1161
+```
+
+
+
+## 3. Preparing Training Spacy Format
+
+For convet data to spacy format make sure data path into script ```utils/conversion_spacy_format.py```,
+
+``` sh
+# input path dir
+input_dir = "./data/ner_spanbased_process_data"
+# output path dir
+output_dir = "./data/ner_spanbased_process_data"
+```
+
+
+Output:
+``` sh
+
+# convert train data to spacy format and save dir
+Spacy Processed file   : ./data/ner_spanbased_process_data/train.spacy
+No. of Processed line : 4483
+# None span found 
+No. of Skip Entity  : 11
+
+# convert val data to spacy format and save dir
+Spacy Processed file   : ./data/ner_spanbased_process_data/val.spacy
+No. of Processed line : 1146
+# None span found
+No. of Skip Entity  : 3
+```
+
+check the annotation visualization [notebook](../training/example/data_annotation_visulization.ipynb)
+
+Now the .spacy file processing process is complete, we can train spacy ner pipeline using .spacy file
+
+
+
+
+N.B : if you want to train the spacy ner pipeline model using BLIOU format data run below the command,
+
+```sh
+Data conversion command for BLIOU, Convert `BLIOU` json format to `.spacy` data format
+
+python -m spacy convert data/bangla_ner_data/train.json ./data
+python -m spacy convert data/bangla_ner_data/val.json ./data
+
+```
+
+## 4. Augment Data generation
+
+- Scraping human name data from several website
+- Replace the name into text using span position and update the IOU span of the text.
+
+
+## 5. Data Processing Summary
+
+Here the report present dataset information, it processing data and exclude data which are not resolve using valid logic. 
+
+
+
+__1. Data Summary__
+![](image/data_summary.png)
 
 
 
@@ -66,22 +231,16 @@ click the colab icon.
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1YU7WXkpdwwmFSwPtZGuzlKgntqmZlALF)
 
-## BERT
-
-
-Not yet complete
-
 
 # Evaluation
 
-| Model Name | Model Type | Approch | Dataset | Precision | Recall | F-Score |
-| ------------- | ------------- | --------    |--------    | ------------- | ------------- | --------    |
-Spacy   | Default(CPU)  |BLIOU  | Train :___, val:__ | 39 M 	| X |  X
-Spacy   | Default(CPU)  |Docanno  | Training : | 99.01%| 77.39%| 86.88%
-Spacy   | Default(CPU)  |Docanno  | Training : | 99.01%| 77.39%| 86.88%
-Spacy  | Default(CPU)  |Docanno  | Training : | 99.01%| 77.39%| 86.88%
-Spacy | Default(CPU)  |Docanno  | Training : | 99.01%| 77.39%| 86.88%
-large  | Default(CPU)  |Docanno  | Training : | 99.01%| 77.39%| 86.88%
+__Model Performance Summary__
+
+![](./image/model_summary.png)
+
+For more detaild check [report](./report/Bangla_NER_report_20231209.xlsx)
+
+
 
 # Inference
 
@@ -94,9 +253,17 @@ run,
 ```py
 pyhton inference.py
 ```
+Or Check the colab for instance inference,
+
+
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1uN1WP7MjaBYXKABfhkHGn7EBWm9kd9k9?usp=sharing)
+
+
 
 
 Code Example,
+
 ```py
 import spacy
 

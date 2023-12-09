@@ -49,13 +49,12 @@ register_dataset = {
 
 __N.B: if any dataset is not possible to collect avoid the data into the register field. data will be processed which have registered.__
 
-
-Run
+Data processing BLIOU Format Run,
 ```
 python utils/data_processing.py
 
 ```
-Output,
+BLIOU Data Distribution Output,
 ```sh
 No. of Training data : 20831
 No. of Validation data : 5208
@@ -87,10 +86,10 @@ output :
 ``` sh
 processed file : ./data/ner_spanbased_process_data/val.jsonl
 Total number of line : 5208
-Person Entity Found  : 1161
+Person Entity Found Line : 1161
 processed file : ./data/ner_spanbased_process_data/train.jsonl
 Total number of line : 20831
-Person Entity Found  : 4483
+Person Entity Found Line : 4483
 ```
 
 
