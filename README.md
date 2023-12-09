@@ -1,6 +1,6 @@
 # Bangla_NER
 
-Bangla Name Entity Recognition (NER) is extracting human names from input Bangla string or text. To solve this problem here select [Spacy](https://spacy.io/) pipeline and try 5 experimental approaches. 
+Bangla Name Entity Recognition (NER) is extracting human names from input Bangla string or text. To solve this problem select [Spacy](https://spacy.io/) pipeline and try 5 experimental approaches. 
 
 The experiment is done only using one entity name (person) labeled as PER. After completing the experiment we got the best performance from the spacy transformer-based model.
 
