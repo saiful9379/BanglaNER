@@ -161,6 +161,14 @@ processed file : ./data/ner_spanbased_process_data/val.jsonl
 Total number of line : 5208
 Person Tag Found  : 1161
 ```
+Annotation structure,
+
+```
+{"text": "অ্যাভনার ফ্রিডম্যান (জন্ম ১৯৩২), আংশিক পার্থক্য সমীকরণ", "label": [[0, 19, "PER"]]}
+{"text": "এটি ১৯১৪ সালে এডওয়ার্ড মেয়ারিক দ্বারা বর্ণনা করা হয়েছিল।", "label": [[14, 32, "PER"]]}
+{"text": "আমার কাছে একটি সুদৃশ্য ল্যাপ স্টিল ছিল যা ডেভিড লিন্ডলি বেছে নিয়েছিল।", "label": [[42, 55, "PER"]]}
+```
+
 For more details about the Doccano annotation format please check [link](https://doccano.github.io/doccano/tutorial/)
 
 
