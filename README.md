@@ -368,7 +368,7 @@ For more details about API requests, please [check](docs/end_point.md)
 
 # BERT PIPELINE
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1U7DfMarUE61fFyzdWldpzWO7rm5EQRmQ)
-
+[Not Evaluation Yet]
 
 # Reference
 
