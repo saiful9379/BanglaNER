@@ -50,7 +50,7 @@ N.B:  if raise  ```CuPy``` error, install ```pip install CuPy==12.3.0``` version
 ![](image/eda.png)
 
 
-## 2.2 Processed Data Summary__
+## 2.2 Processed Data Summary
 ![](image/data_summary.png)
 
 
