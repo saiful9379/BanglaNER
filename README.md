@@ -278,7 +278,10 @@ __Model Performance Summary__
 
 For more details check [report](./report/Bangla_NER_report_20231209.xlsx)
 
-Make sure the data annotation path and run the ```eval.py``` script,
+Make sure the data annotation path and run the ```eval.py``` script.
+
+
+__N.B : if have any issue raising for model download, please download manually from [here](https://huggingface.co/saiful9379/BanglaNER/tree/main) and place it into ```inference/models folder__
 
 ```
 python eval.py
@@ -290,10 +293,7 @@ For more information check The [experimental details](docs/experiemts.md)
 
 # 5 Inference
 
-For the inference, run ```inference.py``` script the model will download from huggingface and save in the "models" folder.
-
-if have any issues raising model downloading, please download manually from [here](https://huggingface.co/saiful9379/BanglaNER/tree/main)
-
+For the inference, run the ```inference.py``` script the model will download from huggingface and save it in the "inference/models" folder. for manual downloading, check the Model Evaluation N.B section.
 run,
 
 ```py
