@@ -7,29 +7,29 @@ The experiment is done only using one entity name (person) labeled as PER. After
 
 For more detail please check the [experimental details](docs/experiemts.md) The best model F1 score is ~.81.05. 
 
-## Table of Contents
+    ## Table of Contents
+    
+    1. Installation
+    
+    2. Dataset and Data Processing
+    
+    3. Model Building
+    
+    4. Model Evaluation
+    
+    5. Inference
+    
+    6. Docker
+    
+    7. End Point API
+    
+    8. Bert Pipeline[New Experiments]
+    
+    9. References
 
-__1. Installation__
-
-__2. Dataset and Data Processing__
-
-__3. Model Building__
-
-__4. Model Evaluation__
-
-__5. Inference__
-
-__6. Docker__
-
-__7. End Point API__
-
-__8. Bert Pipeline[New Experiemnts]__
-
-__9. References__
 
 
-
-# Installation
+# 1. Installation
 
 ```
 conda create -n bn_ner python=3.8
@@ -38,11 +38,25 @@ pip install -r requirements.txt
 
 N.B:  if raise  ```CuPy``` error, install ```pip install CuPy==12.3.0``` version for GPU acceleration.
 
-# Dataset and Data Processing
+# 2. Dataset and Data Processing
+    2.1 EDA Report
+    2.2 Processed Data Summary
+    2.3 Data Collection Information
+    2.4 Dataset Annotation Information
+    2.5 Data Processing
+
+## 2.1 EDA Report
+
+![](image/eda.png)
+
+
+## 2.2 Processed Data Summary__
+![](image/data_summary.png)
+
 
 Check the ```training/utils``` folder for the Data processing script. 
 
-## Data Collection Information
+## 2.3 Data Collection Information
 
 Bangla NER data is collected from,
 
@@ -52,8 +66,6 @@ Bangla NER data is collected from,
 
 
 3. SemEval2022 Bangla NER Dataset [Link](https://competitions.codalab.org/competitions/36425#learn_the_details)
-
-
 
 
 raw dataset structure into ```raw_data``` folder,
@@ -70,46 +82,39 @@ raw_data
     └── statistics.md
 ```
 
-## Augment Data generation
 
-- Scraping human name data from several websites
-- Replace the name into the text string using span position(starting and ending) and update the IOU span of the text.
+## 2.4 Dataset Annotation Information
 
+Please Check the annotation structure and information about the Bangla NER dataset [check](docs/data_info.md)
 
-## Dataset Annotation Information
-
-Please Check the annotation structure, and information about the Bangla NER dataset [check](docs/data_info.md)
-
-## Data Processing
+## 2.5 Data Processing
 
 
 Data processing approach,
 
-
-1. Raw Data Processing
-2. Span Based Data Processing(Doccano NER format)
-3. Preparing Training Spacy Format
-4. Augment Data generation
-5. Summary Report
-
+    2.5.1 Raw Data Processing
+    2.5.2 Span Based Data Processing(Doccano NER format)
+    2.5.3 Augment Data Generation
+    2.5.4 Preparing Training Spacy Format
+    
 
 <!-- This [IOB-tagging](https://en.wikipedia.org/wiki/Inside%E2%80%93outside%E2%80%93beginning_(tagging)) dataset needs to filter because some lines match with its label and some do not match. -->
-## 1. Raw Data Processing
+## 2.5.1 Raw Data Processing
 Raw data processing steps:
 
-    1. Exclude other classes without PERSON Class(PER)
+    - Exclude other classes without PERSON Class(PER)
 
-    2. Discard the dataset not matching with label
+    - Discard the dataset not matching with label
 
-    3. Clean IOB and remove data that is in the wrong IOB format
+    - Clean IOB and remove data that is in the wrong IOB format
 
-    5. Minimal data removal which is logically valid and matching token.  
+    - Minimal data removal which is logically valid and matching token.  
 
-    6. BLIOU Annotation checking and correction
+    - BLIOU Annotation checking and correction
 
-    7. Data Distribution training (80%) and validation (20%)
+    - Data Distribution training (80%) and validation (20%)
 
-    8. Randomly data shuffle - 4 times
+    - Randomly data shuffle - 4 times
 
 Get for information about ```BLIOU``` format please check [Example](https://github.com/explosion/spaCy/blob/v2.3.5/examples/training/ner_example_data/ner-token-per-line.json)
 
@@ -158,16 +163,12 @@ data
     └── val.json
 ```
 
-__1. EDA Report__
-
-![](image/eda.png)
-
-## 2. Span-Based Data Processing(Doccano NER format)
+## 2.5.2 Span-Based Data Processing(Doccano NER format)
 
 Make sure input and output path directory into script ```python utils/conversion_bliou_to_span_format.py```line number ```201```,
 
 ```sh
-#make sure input path directory
+#make sure the input path directory
 data_path = "./data/ner_bliou_processed_data"
 #make sure output path directory  
 output_dir = "./data/ner_spanbased_process_data"
@@ -194,7 +195,28 @@ Annotation structure,
 For more details about the Doccano annotation format please check [link](https://doccano.github.io/doccano/tutorial/)
 
 
-## 3. Preparing Training Spacy Format
+## 2.5.3 Augment Data Generation
+
+Generate augment data 25.79% compared with original data[5644]. So the number of augmented data is 1454 and distributed as training[80%]  ```1163```  and validation[20%] ```293```.
+
+Proposed Approach,
+- Scraping human name data from several websites
+- Replace the name into the text string using span position(starting and ending) and update the IOU span of the text.
+
+Explanation,
+
+Original Data,
+```
+{"text": "তিনি মোহাম্মদ বাকির আল-সদর এর ছাত্র ছিলেন।", "label": [[5, 26, "PER"]]}
+```
+
+Augmented Data,
+```
+{"text": "তিনি সাইফুল ইসলাম এর ছাত্র ছিলেন।", "label": [[5, 17, "PER"]]}
+```
+replace the the human name ```মোহাম্মদ বাকির আল-সদর``` using name ```সাইফুল ইসলাম``` and generate augment data.
+
+## 2.5.4 Preparing Training Spacy Format
 
 Convert process data to spacy format and make sure data path into script ```utils/conversion_spacy_format.py```,
 
@@ -236,16 +258,8 @@ python -m spacy convert data/bangla_ner_data/val.json ./data
 
 ```
 
-## 5. Data Processing Summary
 
-Here the report presents processed dataset information. During the processing time exclude some data which are not resolvable using valid logic. 
-
-__1. Data Summary__
-![](image/data_summary.png)
-
-
-
-# Model Building
+# 3 Model Building
 
 ## Training Spacy Pipeline
 
@@ -256,16 +270,7 @@ or colab know about into colab check,
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1YU7WXkpdwwmFSwPtZGuzlKgntqmZlALF)
 
 
-# Model Evaluation
-
-Make sure the data annotation path and run,
-
-```
-python eval.py
-
-```
-
-For more information check The [experimental details](docs/experiemts.md)
+# 4 Model Evaluation
 
 __Model Performance Summary__
 
@@ -273,9 +278,17 @@ __Model Performance Summary__
 
 For more details check [report](./report/Bangla_NER_report_20231209.xlsx)
 
+Make sure the data annotation path and run the ```eval.py``` script,
+
+```
+python eval.py
+
+```
+For more information check The [experimental details](docs/experiemts.md)
 
 
-# Inference
+
+# 5 Inference
 
 For the inference, run ```inference.py``` script the model will download from huggingface and save in the "models" folder.
 
@@ -338,7 +351,7 @@ Or
 
 inference notebook [check](training/example/interence.ipynb)
 
-# Docker
+# 6 Docker
 
 ## Docker install
 
@@ -372,7 +385,7 @@ cd inference/
 # run 
 python3 app.py
 ```
-After running the app file output shows ip-address looks like this,
+After running the app file output shows IP-Address looks like,
 
 ```sh
  * Running on all addresses (0.0.0.0)
@@ -383,13 +396,13 @@ __N.B: For API request and docker inference, Take the last ip and change the ```
 
 
 
-# End Point API
+# 7 End Point API(Application Programming Interface)
 
 Some instruction as inference section. run ```app.py``` model will download and the server will run.
 
 For more details about API requests, please [check](docs/end_point.md)
 
-# Bert Pipeline[Bert Pipeline Experiemnt ]
+# 8 Bert Pipeline[Experiment]
 
 Bert Model F1 score is ~.80
 
@@ -453,7 +466,7 @@ def inference(sentence):
 ```
 __N.B : BERT Pipeline add readme (13/12/2023)__
 
-# Reference
+# 9 Reference
 
 1. [Spacy Training Pipelines & Models](https://spacy.io/usage/training)
 2. [NER data annotation](https://doccano.github.io/doccano/tutorial/)
