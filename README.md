@@ -23,7 +23,7 @@ __6. Docker__
 
 __7. End Point API__
 
-__8. BERT PIPELINE[New Experiemnts]__
+__8. Bert Pipeline[New Experiemnts]__
 
 __9. References__
 
@@ -389,7 +389,7 @@ Some instruction as inference section. run ```app.py``` model will download and 
 
 For more details about API requests, please [check](docs/end_point.md)
 
-# BERT PIPELINE[Bert Pipeline Experiemnt ]
+# Bert Pipeline[Bert Pipeline Experiemnt ]
 
 Bert Model F1 score is ~.80
 
