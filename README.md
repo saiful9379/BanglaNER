@@ -51,13 +51,13 @@ raw_data
 
 ## Augment Data generation
 
-- Scraping human name data from several website
-- Replace the name into text using span position and update the IOU span of the text.
+- Scraping human name data from several websites
+- Replace the name into the text string using span position(starting and ending) and update the IOU span of the text.
 
 
 ## Dataset Annotation Information
 
-Please Check annotation structure, information about Bangla NER dataset [check](docs/data_info.md)
+Please Check the annotation structure, and information about the Bangla NER dataset [check](docs/data_info.md)
 
 ## Data Processing
 
@@ -82,7 +82,7 @@ Raw data processing steps:
 
     3. Clean IOB and remove data that is in the wrong IOB format
 
-    5. Minimal data remove which is logically valid and matching token.  
+    5. Minimal data removal which is logically valid and matching token.  
 
     6. BLIOU Annotation checking and correction
 
@@ -114,7 +114,7 @@ register_dataset = {
 }
 ```
 
-__N.B: if any dataset is not possible to collect, avoid the data assing into the register field. data will be processed which have registered.__
+__N.B: if any dataset is not possible to collect, avoid the data assigning into the register field. data will be processed which have registered.__
 
 
 Run
@@ -124,8 +124,8 @@ python utils/data_processing.py
 ```
 Output,
 ```sh
-No. of Training data : 20831
-No. of Validation data : 5208
+No. of Training data: 20831
+No. of Validation data: 5208
 
 ```
 __Data Save directory__,
@@ -155,12 +155,12 @@ output_dir = "./data/ner_spanbased_process_data"
 output : 
 ``` sh
 processed file : ./data/ner_spanbased_process_data/train.jsonl
-Total number of line : 20831
-Person Tag Found  : 4483
+Total number of lines: 20831
+Person Tag Found: 4483
 
 processed file : ./data/ner_spanbased_process_data/val.jsonl
-Total number of line : 5208
-Person Tag Found  : 1161
+Total number of lines: 5208
+Person Tag Found: 1161
 ```
 Annotation structure,
 
@@ -175,7 +175,7 @@ For more details about the Doccano annotation format please check [link](https:/
 
 ## 3. Preparing Training Spacy Format
 
-Convet process data to spacy format make sure data path into script ```utils/conversion_spacy_format.py```,
+Convert process data to spacy format make sure data path into script ```utils/conversion_spacy_format.py```,
 
 ``` sh
 # input path dir
@@ -187,28 +187,28 @@ output_dir = "./data/ner_spanbased_process_data"
 Output:
 ``` sh
 
-# convert train data to spacy format and save dir
+# convert train data to spacy format and save the dir
 Spacy Processed file   : ./data/ner_spanbased_process_data/train.spacy
-No. of Processed line : 4483
+No. of Processed line: 4483
 # None span found 
-No. of Skip Entity  : 11
+No. of Skip Entity: 11
 
 # convert val data to spacy format and save dir
 Spacy Processed file   : ./data/ner_spanbased_process_data/val.spacy
-No. of Processed line : 1146
+No. of Processed line: 1146
 # None span found
 No. of Skip Entity  : 3
 ```
 
 check the annotation visualization [notebook](../training/example/data_annotation_visulization.ipynb)
 
-All the processing is complete, let's accerate the model training.
+All the processing is complete, let's accelerate the model training.
 
 
-N.B : if you want to train the spacy ner pipeline using BLIOU format, run below the command,
+N.B: if you want to train the spacy ner pipeline using BLIOU format, run below the command,
 
 ```sh
-Data conversion command for BLIOU, Convert `BLIOU` json format to `.spacy` data format
+Data conversion command for BLIOU, Convert `BLIOU` JSON format to `.spacy` data format
 
 python -m spacy convert data/bangla_ner_data/train.json ./data
 python -m spacy convert data/bangla_ner_data/val.json ./data
@@ -261,7 +261,7 @@ if have any issues raise model downloading, please download manually from [here]
 run,
 
 ```py
-pyhton inference.py
+python inference.py
 ```
 Or Check the colab for instance inference,
 
