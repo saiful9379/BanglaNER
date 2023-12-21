@@ -5,7 +5,28 @@ Bangla Name Entity Recognition (NER) is extracting human names from input Bangla
 
 The experiment is done only using one entity name (person) labeled as PER. After completing the experiment we got the best performance from the spacy transformer-based model.
 
-For more detail please check the [experimental details](docs/experiemts.md) and Best model F1 score is ~.81.05. 
+For more detail please check the [experimental details](docs/experiemts.md) The best model F1 score is ~.81.05. 
+
+## Table of Contents
+
+__1. Installation__
+
+__2. Dataset and Data Processing__
+
+__3. Model Building__
+
+__4. Model Evaluation__
+
+__5. Inference__
+
+__6. Docker__
+
+__7. End Point API__
+
+__8. BERT PIPELINE[New Experiemnts]__
+
+__9. References__
+
 
 
 # Installation
@@ -17,9 +38,9 @@ pip install -r requirements.txt
 
 N.B:  if raise  ```CuPy``` error, install ```pip install CuPy==12.3.0``` version for GPU acceleration.
 
-# Dataset
+# Dataset and Data Processing
 
-Check the ```training/utils``` folder for Data processing script. 
+Check the ```training/utils``` folder for the Data processing script. 
 
 ## Data Collection Information
 
@@ -175,7 +196,7 @@ For more details about the Doccano annotation format please check [link](https:/
 
 ## 3. Preparing Training Spacy Format
 
-Convert process data to spacy format make sure data path into script ```utils/conversion_spacy_format.py```,
+Convert process data to spacy format and make sure data path into script ```utils/conversion_spacy_format.py```,
 
 ``` sh
 # input path dir
@@ -193,7 +214,7 @@ No. of Processed line: 4483
 # None span found 
 No. of Skip Entity: 11
 
-# convert val data to spacy format and save dir
+# convert val data to spacy format and save the dir
 Spacy Processed file   : ./data/ner_spanbased_process_data/val.spacy
 No. of Processed line: 1146
 # None span found
@@ -235,14 +256,16 @@ or colab know about into colab check,
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1YU7WXkpdwwmFSwPtZGuzlKgntqmZlALF)
 
 
-# Evaluation
+# Model Evaluation
 
-Make sure data annotation path and run,
+Make sure the data annotation path and run,
 
 ```
 python eval.py
 
 ```
+
+For more information check The [experimental details](docs/experiemts.md)
 
 __Model Performance Summary__
 
@@ -256,7 +279,7 @@ For more details check [report](./report/Bangla_NER_report_20231209.xlsx)
 
 For the inference, run ```inference.py``` script the model will download from huggingface and save in the "models" folder.
 
-if have any issues raise model downloading, please download manually from [here](https://huggingface.co/saiful9379/BanglaNER/tree/main)
+if have any issues raising model downloading, please download manually from [here](https://huggingface.co/saiful9379/BanglaNER/tree/main)
 
 run,
 
@@ -325,7 +348,7 @@ For docker install please [check](https://www.digitalocean.com/community/tutoria
 ## Docker Build
 
 ```
-sudo docker build -t bangla_ner .
+sudo docker build -t bangla_ner.
 ```
 Check the Docker image and image ID,
 
@@ -339,7 +362,7 @@ bangla_ner      latest                              c34a96d16f48   4 minutes ago
 
 ```
 
-For cpu run,
+For CPU run,
 
 ```sh
 # run it first
@@ -349,7 +372,7 @@ cd inference/
 # run 
 python3 app.py
 ```
-After running app file output show ip-address looks like this,
+After running the app file output shows ip-address looks like this,
 
 ```sh
  * Running on all addresses (0.0.0.0)
