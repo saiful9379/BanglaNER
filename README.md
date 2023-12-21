@@ -30,7 +30,7 @@ Bangla NER data is collected from,
 2. Rifat1493 Bangla NER Dataset [Link](https://github.com/Rifat1493/Bengali-NER/tree/master/Input) 
 
 
-3. SemEval2022 Bangla NER Dataaset [Link](https://competitions.codalab.org/competitions/36425#learn_the_details)
+3. SemEval2022 Bangla NER Dataset [Link](https://competitions.codalab.org/competitions/36425#learn_the_details)
 
 
 
