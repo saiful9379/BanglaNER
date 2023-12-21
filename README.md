@@ -281,7 +281,7 @@ For more details check [report](./report/Bangla_NER_report_20231209.xlsx)
 Make sure the data annotation path and run the ```eval.py``` script.
 
 
-__N.B : if have any issue raising for model download, please download manually from [here](https://huggingface.co/saiful9379/BanglaNER/tree/main) and place it into ```inference/models folder__
+__N.B: If any issue occurs for model download, please download manually from [here](https://huggingface.co/saiful9379/BanglaNER/tree/main) and place it into ```inference/models folder__
 
 ```
 python eval.py
