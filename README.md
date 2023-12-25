@@ -42,7 +42,7 @@ N.B:  if raise  ```CuPy``` error, install ```pip install CuPy==12.3.0``` version
     2.1 EDA Report
     2.2 Processed Data Summary
     2.3 Data Collection Information
-    2.4 Dataset Annotation Information
+    2.4 Data Annotation Information
     2.5 Data Processing
 
 ## 2.1 EDA Report
@@ -83,7 +83,7 @@ raw_data
 ```
 
 
-## 2.4 Dataset Annotation Information
+## 2.4 Data Annotation Information
 
 Please Check the annotation structure and information about the Bangla NER dataset [check](docs/data_info.md)
 
